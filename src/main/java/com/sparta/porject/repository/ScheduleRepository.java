@@ -87,7 +87,7 @@ public class ScheduleRepository {
         jdbcTemplate.update(sql, password);
     }
 
-    //선택한 일정 조회
+    //선택한 일정 조회 (id)
     public Schedule findById(Long id) {
 
         String sql = "SELECT * FROM scheduleuser WHERE id = ?";
@@ -108,6 +108,7 @@ public class ScheduleRepository {
         }, id);
     }
 
+    //선택한 일정 조회 (password)
     public Schedule findByPassword(String password) {
 
         String sql = "SELECT * FROM scheduleuser WHERE password = ?";
