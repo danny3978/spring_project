@@ -24,4 +24,6 @@ public class ScheduleController {
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.createSchedule(requestDto);
     }
+
+    //선택한 일정 조회
 }

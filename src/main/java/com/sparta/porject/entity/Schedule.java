@@ -5,6 +5,7 @@ import com.sparta.porject.dto.ScheduleRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.sql.Date;
 
@@ -12,6 +13,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@EntityScan
 public class Schedule {
     private Long id;
     private String name;
