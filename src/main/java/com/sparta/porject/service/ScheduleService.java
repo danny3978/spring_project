@@ -24,12 +24,20 @@ public class ScheduleService {
         //Entity로 변경
         Schedule schedule = new Schedule(requestDto);
 
-        //DB 등록
+        //password가 있는지 확인
         ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
+        boolean checkPassword = scheduleRepository.checkPassword(schedule.getPassword());
+
+        if(checkPassword){
+            throw new IllegalArgumentException("이미 존재하는 비밀번호입니다.");
+        }
+
+        //DB 등록
         Schedule saveSchedule = scheduleRepository.save(schedule);
 
+
         //ResponseDto로 변경
-        ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(schedule);
+        ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(saveSchedule);
         return scheduleResponseDto;
     }
 

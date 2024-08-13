@@ -92,6 +92,7 @@ public class ScheduleRepository {
 
         String sql = "SELECT * FROM scheduleuser WHERE id = ?";
 
+
         return jdbcTemplate.query(sql, resultSet -> {
             if(resultSet.next()) {
                 Schedule schedule = new Schedule();
@@ -129,6 +130,11 @@ public class ScheduleRepository {
         }, name,password);
     }
 
-
+    //password Check
+    public boolean checkPassword(String password){
+        String sql = "SELECT COUNT(*) FROM scheduleuser WHERE password = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, new Object[] {password}, Integer.class);
+        return count != null && count > 0;
+    }
 }
 
