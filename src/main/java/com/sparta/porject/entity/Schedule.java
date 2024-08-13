@@ -1,6 +1,5 @@
 package com.sparta.porject.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sparta.porject.dto.ScheduleRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
