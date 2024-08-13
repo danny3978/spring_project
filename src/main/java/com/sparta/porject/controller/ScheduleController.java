@@ -42,14 +42,14 @@ public class ScheduleController {
 
     //선택한 일정 수정
     @PutMapping("/update")
-    public String updateSchedule(@RequestParam String name, @RequestParam String password, @RequestBody ScheduleRequestDto scheduleRequestDto){
+    public String updateSchedule(@RequestParam(required = false) String name, @RequestParam String password, @RequestBody ScheduleRequestDto scheduleRequestDto){
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.updateSchedule(name,password,scheduleRequestDto);
     }
 
     //선택한 일정 삭제
     @DeleteMapping("/delete")
-    public String deleteSchedule(@RequestParam String name, @RequestParam String password){
+    public String deleteSchedule(@RequestParam(required = false) String name, @RequestParam String password){
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
         return scheduleService.deleteSchedule(name, password);
     }
