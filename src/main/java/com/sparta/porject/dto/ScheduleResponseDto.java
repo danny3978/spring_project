@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 public class ScheduleResponseDto {
     private Long id;
     private String name;
-    private String password;
     private String to_do;
     private String write_day;
     private String update_day;
@@ -22,7 +21,6 @@ public class ScheduleResponseDto {
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();
         this.name = schedule.getName();
-        this.password = schedule.getPassword();
         this.to_do = schedule.getTo_do();
         this.write_day = formatDate(schedule.getWrite_day());
         this.update_day = formatDate(schedule.getUpdate_day());
@@ -31,7 +29,6 @@ public class ScheduleResponseDto {
     public ScheduleResponseDto(Long id, String name, String password, String to_do, LocalDateTime write_day, LocalDateTime update_day){
         this.id = id;
         this.name = name;
-        this.password = password;
         this.to_do = to_do;
         this.write_day = formatDate(write_day);
         this.update_day = formatDate(update_day);
