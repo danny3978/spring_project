@@ -51,6 +51,6 @@ public class ScheduleController {
     @DeleteMapping("/delete/{password}")
     public String deleteSchedule(@PathVariable String password){
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
-        scheduleService.deleteSchedule(password);
+        return scheduleService.deleteSchedule(password);
     }
 }
