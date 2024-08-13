@@ -52,24 +52,24 @@ public class ScheduleService {
     }
 
     //선택한 일정 수정
-    public String updateSchedule(String password ,ScheduleRequestDto scheduleRequestDto) {
+    public String updateSchedule(String name, String password ,ScheduleRequestDto scheduleRequestDto) {
        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-       Schedule schedule = scheduleRepository.findByPassword(password);
+       Schedule schedule = scheduleRepository.findByNamePassword(name, password);
        if(schedule != null){
-           scheduleRepository.updateSchedule(password, scheduleRequestDto);
-           return password;
+           scheduleRepository.updateSchedule(name, password, scheduleRequestDto);
+           return "일정 수정 완료";
        }else {
            throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
        }
     }
 
     //선택한 일정 삭제
-    public String deleteSchedule(String password) {
+    public String deleteSchedule(String name, String password) {
        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-       Schedule schedule = scheduleRepository.findByPassword(password);
+       Schedule schedule = scheduleRepository.findByNamePassword(name, password);
        if(schedule != null){
-           scheduleRepository.deleteSchedule(password);
-           return password;
+           scheduleRepository.deleteSchedule(name, password);
+           return "일정 삭제 완료";
        }else {
            throw new IllegalArgumentException("비밀번호가 맞지 않습니다.");
        }

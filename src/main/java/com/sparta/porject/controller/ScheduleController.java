@@ -41,16 +41,16 @@ public class ScheduleController {
     }
 
     //선택한 일정 수정
-    @PutMapping("/update/{password}")
-    public String updateSchedule(@PathVariable String password, @RequestBody ScheduleRequestDto scheduleRequestDto){
+    @PutMapping("/update")
+    public String updateSchedule(@RequestParam String name, @RequestParam String password, @RequestBody ScheduleRequestDto scheduleRequestDto){
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
-        return scheduleService.updateSchedule(password,scheduleRequestDto);
+        return scheduleService.updateSchedule(name,password,scheduleRequestDto);
     }
 
     //선택한 일정 삭제
-    @DeleteMapping("/delete/{password}")
-    public String deleteSchedule(@PathVariable String password){
+    @DeleteMapping("/delete")
+    public String deleteSchedule(@RequestParam String name, @RequestParam String password){
         ScheduleService scheduleService = new ScheduleService(jdbcTemplate);
-        return scheduleService.deleteSchedule(password);
+        return scheduleService.deleteSchedule(name, password);
     }
 }

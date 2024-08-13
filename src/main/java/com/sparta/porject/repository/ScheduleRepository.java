@@ -47,18 +47,18 @@ public class ScheduleRepository {
     //전체 일정 조회
     public List<ScheduleResponseDto> finAll(LocalDate updateDay, String name) {
 
-        String sql = "SELECT * FROM scheduleuser WHERE 1=1";
+        String sql = "SELECT * FROM scheduleuser WHERE 1 = 1";
         List<Object> params = new ArrayList<>();
         if(updateDay != null){
-            sql += "AND DATE(update_day) = ?";
+            sql += " AND DATE(update_day) = ?";
             params.add(Date.valueOf(updateDay));
         }
         if(name != null){
-            sql += "AND name = ?";
+            sql += " AND name = ?";
             params.add(name);
         }
 
-        sql += "ORDER BY update_day";
+        sql += " ORDER BY update_day DESC";
 
 
         return jdbcTemplate.query(sql, params.toArray(), new RowMapper<ScheduleResponseDto>() {
@@ -76,15 +76,15 @@ public class ScheduleRepository {
     }
 
     //선택한 일정 수정
-    public void updateSchedule(String password, ScheduleRequestDto scheduleRequestDto) {
-        String sql = "UPDATE scheduleuser SET name = ?, to_do = ? ,update_day = ? WHERE password = ?";
-        jdbcTemplate.update(sql, scheduleRequestDto.getName(), scheduleRequestDto.getTo_do(), Timestamp.valueOf(LocalDateTime.now()), password);
+    public void updateSchedule(String name, String password, ScheduleRequestDto scheduleRequestDto) {
+        String sql = "UPDATE scheduleuser SET name = ?, to_do = ? ,update_day = ? WHERE name = ? AND password = ?";
+        jdbcTemplate.update(sql, scheduleRequestDto.getName(), scheduleRequestDto.getTo_do(), Timestamp.valueOf(LocalDateTime.now()), name, password);
     }
 
     //선택한 일정 삭제
-    public void deleteSchedule(String password) {
-        String sql = "DELETE FROM scheduleuser WHERE password = ?";
-        jdbcTemplate.update(sql, password);
+    public void deleteSchedule(String name, String password) {
+        String sql = "DELETE FROM scheduleuser WHERE name = ? AND password = ?";
+        jdbcTemplate.update(sql, name, password);
     }
 
     //선택한 일정 조회 (id)
@@ -108,10 +108,10 @@ public class ScheduleRepository {
         }, id);
     }
 
-    //선택한 일정 조회 (password)
-    public Schedule findByPassword(String password) {
+    //선택한 일정 조회 (name, password)
+    public Schedule findByNamePassword(String name, String password) {
 
-        String sql = "SELECT * FROM scheduleuser WHERE password = ?";
+        String sql = "SELECT * FROM scheduleuser WHERE name = ? AND password = ?";
 
         return jdbcTemplate.query(sql, resultSet -> {
             if(resultSet.next()) {
@@ -126,7 +126,7 @@ public class ScheduleRepository {
             } else {
                 return null;
             }
-        }, password);
+        }, name,password);
     }
 
 
