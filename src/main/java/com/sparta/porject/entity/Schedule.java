@@ -2,13 +2,11 @@ package com.sparta.porject.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sparta.porject.dto.ScheduleRequestDto;
-import com.sparta.porject.dto.ScheduleResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 // DB랑 소통
 @Getter
