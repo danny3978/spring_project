@@ -87,32 +87,22 @@ public class ScheduleRepository {
         jdbcTemplate.update(sql, name, password);
     }
 
-    //선택한 일정 조회 (id)
-    public Schedule findById(Long id) {
+    //선택한 일정 조회 (id, name, password)
+    public Schedule findById(Long id, String name ,String password) {
 
-        String sql = "SELECT * FROM scheduleuser WHERE id = ?";
+        String sql = "SELECT * FROM scheduleuser WHERE ";
+        List<Object> List = new ArrayList<>();
+        if(id != null){
+            sql += "id = ?";
+            List.add(id);
+        }
 
+        if(name != null && password != null){
+            sql += "name = ? AND password = ?";
+            List.add(name);
+            List.add(password);
+        }
 
-        return jdbcTemplate.query(sql, resultSet -> {
-            if(resultSet.next()) {
-                Schedule schedule = new Schedule();
-                schedule.setId(resultSet.getLong("id"));
-                schedule.setName(resultSet.getString("name"));
-                schedule.setPassword(resultSet.getString("password"));
-                schedule.setTo_do(resultSet.getString("to_do"));
-                schedule.setWrite_day(resultSet.getTimestamp("write_day").toLocalDateTime());
-                schedule.setUpdate_day(resultSet.getTimestamp("update_day").toLocalDateTime());
-                return schedule;
-            } else {
-                return null;
-            }
-        }, id);
-    }
-
-    //선택한 일정 조회 (name, password)
-    public Schedule findByNamePassword(String name, String password) {
-
-        String sql = "SELECT * FROM scheduleuser WHERE name = ? AND password = ?";
 
         return jdbcTemplate.query(sql, resultSet -> {
             if(resultSet.next()) {
@@ -127,7 +117,7 @@ public class ScheduleRepository {
             } else {
                 return null;
             }
-        }, name,password);
+        }, List.toArray());
     }
 
     //password Check

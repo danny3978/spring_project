@@ -44,7 +44,7 @@ public class ScheduleService {
     //선택한 일정 조회
     public ScheduleResponseDto choiceSelect(Long id) {
        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-       Schedule schedule = scheduleRepository.findById(id);
+       Schedule schedule = scheduleRepository.findById(id,null, null);
        if(schedule != null){
            return new ScheduleResponseDto(schedule);
        }else {
@@ -62,7 +62,7 @@ public class ScheduleService {
     //선택한 일정 수정
     public String updateSchedule(String name, String password ,ScheduleRequestDto scheduleRequestDto) {
        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-       Schedule schedule = scheduleRepository.findByNamePassword(name, password);
+       Schedule schedule = scheduleRepository.findById(null, name, password);
        if(schedule != null){
            scheduleRepository.updateSchedule(name, password, scheduleRequestDto);
            return "일정 수정 완료";
@@ -74,7 +74,7 @@ public class ScheduleService {
     //선택한 일정 삭제
     public String deleteSchedule(String name, String password) {
        ScheduleRepository scheduleRepository = new ScheduleRepository(jdbcTemplate);
-       Schedule schedule = scheduleRepository.findByNamePassword(name, password);
+       Schedule schedule = scheduleRepository.findById(null, name, password);
        if(schedule != null){
            scheduleRepository.deleteSchedule(name, password);
            return "일정 삭제 완료";
