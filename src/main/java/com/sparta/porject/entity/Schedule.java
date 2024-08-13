@@ -18,10 +18,7 @@ public class Schedule {
     private String password;
     private String to_do;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime write_day;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime update_day;
 
     public Schedule(ScheduleRequestDto scheduleRequestDto) {
