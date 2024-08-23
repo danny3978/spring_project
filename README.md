@@ -16,8 +16,8 @@ scheduleUser 테이블의 ERD
 [APi 명세서 가기](https://documenter.getpostman.com/view/37561614/2sA3s4nB2S)
 
 
-DB : MySQL 사용
-개발 : Java Spring Boot 사용
-구현 : Restful APi 구현하려 했으나 경로를 보면 아직 Restful하지 않다
-POST /api/add -- 이런 식으로 되어있음 
-POST /api/schedule 이런 식으로 해두면 좋을 듯
+ 1. DB : MySQL 사용
+ 2. 개발 : Java Spring Boot 사용
+ 3. 구현 : Restful APi 구현하려 했으나 경로를 보면 아직 Restful하지 않다
+ 4. POST /api/add -- 이런 식으로 되어있음
+ 5. POST /api/schedule 이런 식으로 해두면 좋을 듯
